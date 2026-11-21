@@ -7,3 +7,4 @@ desktop.ini
 *.orig
 *.swp
 __pycache__/
+dist/

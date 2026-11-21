@@ -18,13 +18,17 @@ def is_packaged(relative_path):
     return not any(part.startswith(".") or part.endswith("~") for part in relative_path.split("/"))
 
 
-def collect():
+def collect(output):
     assets, errors = [], []
+    output = os.path.abspath(output)
     for directory, folders, files in os.walk(ROOT):
         folders.sort()
         relative_dir = os.path.relpath(directory, ROOT).replace(os.sep, "/")
         relative_dir = "" if relative_dir == "." else relative_dir
-        folders[:] = [f for f in folders if is_packaged(f"{relative_dir}/{f}".lstrip("/"))]
+        folders[:] = [
+            f for f in folders
+            if is_packaged(f"{relative_dir}/{f}".lstrip("/")) and os.path.abspath(os.path.join(directory, f)) != output
+        ]
         names = set(files)
         for name in sorted(files):
             path = f"{relative_dir}/{name}".lstrip("/")
@@ -132,7 +136,7 @@ def main():
     unitypackage_path = os.path.join(args.out, f"{stem}.unitypackage")
 
     manifest["url"] = f"https://github.com/{args.repo}/releases/download/{tag}/{stem}.zip"
-    assets = collect()
+    assets = collect(args.out)
     build_zip(zip_path, assets, manifest)
     build_unitypackage(unitypackage_path, assets, manifest, f"Packages/{name}")
 
