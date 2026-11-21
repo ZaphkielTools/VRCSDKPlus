@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "node",
+  "bootstrap-sha": "41287975e900ae698ebc011e1ad2a7699ca7721c",
+  "include-component-in-tag": false,
+  "packages": {
+    ".": {
+      "package-name": "dev.zaphkiel.vrcsdkplus",
+      "changelog-path": "CHANGELOG.md"
+    }
+  }
+}
