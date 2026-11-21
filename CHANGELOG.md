@@ -13,6 +13,7 @@
 - [Misc] Enums read and written by value, field names through nameof, one undo-safe path for whole-control edits, the details panel built once per action, SerializedObjects disposed.
 - [Misc] 65 EditMode tests (Tests/), including one that fails if a Unity update breaks the inspector override.
 - [Misc] The credits link to github.com/Dreadrith: dreadrith.com/links and the original repository are offline.
+- [Misc] Both inspectors credit the Unity 6 fork under the original credits.
 
 (Zaphkiel fork, 2026-11-21) — Parent menus
 --------

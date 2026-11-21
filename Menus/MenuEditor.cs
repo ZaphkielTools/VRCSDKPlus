@@ -62,6 +62,7 @@ namespace Zaphkiel.VRCSDKPlus
             root.Add(list = CreateList());
             root.Add(details = new VisualElement());
             root.Add(Ui.Credits("Editor by", ("@fox_score", "https://github.com/foxscore"), ("@Dreadrith", "https://github.com/Dreadrith")));
+            root.Add(Ui.ForkCredits());
 
             Ui.Track(root, serializedObject, OnMenuChanged);
             root.RegisterCallback<AttachToPanelEvent>(_ =>

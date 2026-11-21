@@ -143,6 +143,13 @@ namespace Zaphkiel.VRCSDKPlus
             return link;
         }
 
+        public static VisualElement ForkCredits()
+        {
+            var row = Credits("Unity 6 fork by", ("@Zaphkiel", "https://github.com/ZaphkielTools"));
+            row.AddToClassList("vsp-footer--fork");
+            return row;
+        }
+
         public static VisualElement Credits(string prefix, params (string Text, string Url)[] links)
         {
             var row = Row("vsp-footer");

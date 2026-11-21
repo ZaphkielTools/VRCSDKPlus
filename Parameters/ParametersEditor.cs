@@ -55,6 +55,7 @@ namespace Zaphkiel.VRCSDKPlus
             root.Add(cleanupBox = CreateCleanupBox());
             root.Add(CreateMergeField());
             root.Add(Ui.Credits(null, ("Made by @Dreadrith ♡", "https://github.com/Dreadrith")));
+            root.Add(Ui.ForkCredits());
 
             Ui.Track(root, serializedObject, OnTrackedChange);
             root.RegisterCallback<AttachToPanelEvent>(_ =>

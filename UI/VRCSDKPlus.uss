@@ -108,6 +108,10 @@
     margin-top: 4px;
 }
 
+.vsp-footer--fork {
+    margin-top: 0;
+}
+
 .vsp-footer-text,
 .vsp-link {
     font-size: 10px;
