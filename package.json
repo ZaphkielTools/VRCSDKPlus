@@ -1,0 +1,27 @@
+{
+  "name": "dev.zaphkiel.vrcsdkplus",
+  "displayName": "VRCSDK+",
+  "version": "2.0.0",
+  "unity": "6000.0",
+  "description": "Inspectors for VRChat Expression Menus and Parameters. Unity 6 fork of VRCSDK+ by Dreadrith.",
+  "keywords": [
+    "VRChat",
+    "Expression Menu",
+    "Expression Parameters",
+    "Editor Tool"
+  ],
+  "author": {
+    "name": "Zaphkiel",
+    "url": "https://github.com/ZaphkielTools"
+  },
+  "license": "GPL-3.0-only",
+  "licensesUrl": "https://github.com/ZaphkielTools/VRCSDKPlus/blob/main/LICENSE.md",
+  "documentationUrl": "https://github.com/ZaphkielTools/VRCSDKPlus#readme",
+  "changelogUrl": "https://github.com/ZaphkielTools/VRCSDKPlus/blob/main/CHANGELOG.md",
+  "vpmDependencies": {
+    "com.vrchat.avatars": ">=3.11.0-beta.1"
+  },
+  "legacyPackages": [
+    "com.dreadscripts.vrcsdkplus"
+  ]
+}

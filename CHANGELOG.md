@@ -1,54 +1,58 @@
-(Zaphkiel fork, 2026-11-21) — Quality pass
---------
-- [Fix] "Add" on a puppet axis created a second parameter when one with that name existed with another type. Adding now refuses any existing name.
-- [Fix] Displaying a control could change the menu asset (bool values forced to 1, missing axes filled in), with an undo step. Displaying never writes now: a "Set 1" button and a Repair box do it on a click.
-- [Fix] "Place Here" was disabled in a full menu, even to move a control within that menu.
-- [Fix] Quick Setup threw on avatars without a humanoid head bone, and could run the lip sync detection on another avatar's inspector.
-- [Fix] Copied controls lost their icon and submenu after an editor restart (references by session ID). Copies now store asset GUIDs; old copies still paste.
-- [Fix] The first/last history buttons did nothing when that menu had been deleted.
-- [Fix] Parameters declared by an Animator Override Controller's base controller were reported missing.
-- [Fix] Unknown keyboard commands fell through to Delete.
-- [Improvement] Cleanup asks for confirmation: Modular Avatar and VRCFury add parameters to the controllers only at build time.
-- [Improvement] A puppet axis that points to a parameter of the wrong type is flagged.
-- [Misc] Enums read and written by value, field names through nameof, one undo-safe path for whole-control edits, the details panel built once per action, SerializedObjects disposed.
-- [Misc] 65 EditMode tests (Tests/), including one that fails if a Unity update breaks the inspector override.
-- [Misc] The credits link to github.com/Dreadrith: dreadrith.com/links and the original repository are offline.
-- [Misc] Both inspectors credit the Unity 6 fork under the original credits.
+# Changelog
 
-(Zaphkiel fork, 2026-11-21) — Parent menus
---------
-- [Feature] The Menu inspector lists the menus that open it as a submenu (and through which controls), and the scene avatars using it as their root menu. Opening a parent selects the linking control.
-- [Feature] Menus that open themselves as a submenu are flagged.
-- [Misc] The lookup uses a reverse index built in the background from saved dependencies (about 160 ms for 420 menus, spread over editor frames), updated per saved, moved or deleted menu, and confirmed in memory so unsaved links count too.
+## [2.0.0](https://github.com/ZaphkielTools/VRCSDKPlus/releases/tag/v2.0.0) (2026-11-21)
 
-(Zaphkiel fork, 2026-11-21) — based on v1.6.0
---------
-- [Misc] Moved into Assets/Zaphkiel/Editor/VRCSDKPlus, removed from the VCC manifest. Assembly renamed Zaphkiel.Editor.VRCSDKPlus, namespace Zaphkiel.VRCSDKPlus.
-- [Misc] Split the single 3,500-line file into Core, UI, Parameters, Menus and Avatar modules.
-- [Improvement] Both inspectors rebuilt on UI Toolkit. Parameters inspector repaint: about 24 ms → 2 ms with 51 parameters, 29 ms → 3 ms with 152. Menu inspector: 4.3 ms → 1.9 ms.
-- [Feature] Synced bits bar on the Parameters inspector, counted with the SDK's CalcTotalCost (SDK 3.11 bit widths).
-- [Feature] Resizable columns; parameter names are no longer cut off or overlapped by the type hint.
-- [Feature] "[SDK+] Toggle Editor" now persists across recompiles.
-- [Fix] Unity 6: the editor override used CustomEditorAttributes fields that no longer exist (NullReferenceException on load).
-- [Fix] Searching with characters such as ( [ + * ? threw an exception on every repaint (the search was a regex).
-- [Fix] Merge Parameters dropped "saved" and the SDK 3.11 fields (bit width, lerp duration, representation).
-- [Fix] Changing a parameter type now resets its bit width and representation, and clamps its default value, like the SDK does.
-- [Fix] Adding, removing or cleaning parameters keeps the SDK's isEmpty flag in sync.
-- [Fix] Moving a control within the same menu could re-insert it at its old place; moving into an empty menu duplicated it instead of moving it.
-- [Fix] Compact two-axis puppets labeled the Up label slot as "Left" and the Left slot as "Up".
-- [Fix] The avatar selector could pick the wrong avatar, or throw every repaint, after an avatar was deleted from the scene.
-- [Fix] Dropdown highlight colors were shared with other textures and changed at random.
-- [Fix] Creating a submenu from a styled control name produced file names with rich-text tags.
-- [Fix] Unity 6: the "Clear" icon (winbtn_win_close) no longer exists; replaced with CrossIcon.
+First release of the Unity 6 fork of VRCSDK+ 1.6.0 by Dreadrith.
 
-(v1.5.1)
---------
+### ⚠ BREAKING CHANGES
+
+* Requires Unity 6000.0 and VRChat Avatars SDK 3.11.0 or later.
+* The package is `dev.zaphkiel.vrcsdkplus`, with assembly `Zaphkiel.Editor.VRCSDKPlus` and namespace `Zaphkiel.VRCSDKPlus`. Installing it from the VCC removes `com.dreadscripts.vrcsdkplus`.
+
+### Features
+
+* Both inspectors run on UI Toolkit. The Parameters inspector repaints in 2 ms instead of 24 ms with 51 parameters, and in 3 ms instead of 29 ms with 152.
+* Synced bits bar on the Parameters inspector, computed with the SDK's `CalcTotalCost`, SDK 3.11 bit widths included.
+* Resizable columns in the parameter table. Long names no longer overlap the type hint.
+* Parent menus: the Menu inspector lists the menus that open it as a submenu, the controls that do it, and the scene avatars that use it as their root menu. Opening a parent selects the linking control, and a menu that opens itself is flagged.
+* A puppet axis that points to a parameter of the wrong type is flagged.
+* Cleanup asks for confirmation, since Modular Avatar and VRCFury add parameters to the controllers at build time.
+* "[SDK+] Toggle Editor" keeps its choice across recompiles.
+* Copied controls store asset GUIDs and keep their icon and submenu after an editor restart. Copies made with VRCSDK+ 1.6.0 still paste.
+* Both inspectors credit the Unity 6 fork under the original credits.
+
+### Bug Fixes
+
+* Unity 6: the inspector override read `CustomEditorAttributes` fields that no longer exist and threw a NullReferenceException on load.
+* Unity 6: the Clear icon `winbtn_win_close` no longer exists. The inspectors use `CrossIcon`.
+* Displaying a control changed the menu asset, forcing bool values to 1 and filling in missing axes. A "Set 1" button and a Repair box now do it on a click.
+* "Add" on a puppet axis created a second parameter when one with that name existed with another type.
+* Searching with `(`, `[`, `+`, `*` or `?` threw an exception on every repaint.
+* Merge Parameters dropped `saved` and the SDK 3.11 fields: bit width, lerp duration and representation.
+* Changing a parameter type resets its bit width and representation and clamps its default value, like the SDK.
+* Adding, removing or cleaning parameters keeps the SDK's `isEmpty` flag in sync.
+* Parameters declared by the base controller of an Animator Override Controller showed as missing.
+* Moving a control within its menu could put it back at its old place, and moving it into an empty menu duplicated it.
+* "Place Here" stayed disabled in a full menu, even to move a control within that menu.
+* The first and last history buttons did nothing when that menu had been deleted.
+* Compact two-axis puppets swapped the Up and Left label slots.
+* The avatar selector could pick the wrong avatar, or throw on every repaint, after an avatar was deleted.
+* Quick Setup threw on avatars without a humanoid head bone, and could run lip sync detection in another avatar's inspector.
+* Dropdown highlight colors changed at random.
+* Creating a submenu from a styled control name put rich-text tags in the file name.
+* Unknown keyboard commands deleted the selected entry.
+
+### Miscellaneous
+
+* The code lives in Core, UI, Parameters, Menus and Avatar folders and has 65 EditMode tests.
+* The credits link to github.com/Dreadrith, since dreadrith.com/links and the original repository are offline.
+
+## 1.5.1
 - [Misc] Changed license to GPL-3.0 and shared the source code.
 - [Fix] Fixed pasting or moving a control into an empty menu throwing an error
 - [Fix/Misc] New controls' values will now be set to 1 by default like original VRC does.
 
-(v1.5.0)
---------
+## 1.5.0
 - [Feature] Added Keyboard commands (shortcuts) and context menus (right click) to Parameters and Menu Editors
 	- Parameter editor can now handle Ctrl+D and 'DEL' for Duplicate and Delete respectively.
 	- Menu editor can now handle Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+D, and 'DEL' for Copy, Cut, Paste, Duplicate and Delete respectively.
@@ -61,8 +65,7 @@
 - [Fix] Fixed parameter editor rendering when unity is not in fullscreen.
 - [Misc] Added unity version to package.json to suppress VCC warning about the version.
 
-(v1.4.0)
---------
+## 1.4.0
 - [Feature] Double clicking a submenu control will now switch to that submenu
 - [Improvement] Decent performance boost to parameters editor.
 - [Fix] Fixed compatibility with 2022 SDK
