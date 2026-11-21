@@ -1,5 +1,6 @@
 {
-    "name": "com.dreadscripts.vrcsdkplus",
+    "name": "Zaphkiel.Editor.VRCSDKPlus",
+    "rootNamespace": "Zaphkiel.VRCSDKPlus",
     "references": [],
     "includePlatforms": [
         "Editor"
