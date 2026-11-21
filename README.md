@@ -46,20 +46,29 @@ Fills the Avatar Descriptor from the humanoid rig: view position between the eye
 
 ## Installation
 
-1. Remove the VCC package `com.dreadscripts.vrcsdkplus` if your project has it. With both installed, two copies register the same inspectors and menu items.
-2. Clone the repository anywhere under `Assets`:
+Each [release](https://github.com/ZaphkielTools/VRCSDKPlus/releases) carries three files:
 
-   ```sh
-   git clone https://github.com/ZaphkielTools/VRCSDKPlus.git Assets/VRCSDKPlus
-   ```
+| File | Use |
+| --- | --- |
+| `dev.zaphkiel.vrcsdkplus-<version>.unitypackage` | Open it in Unity. It installs into `Packages/dev.zaphkiel.vrcsdkplus`. |
+| `dev.zaphkiel.vrcsdkplus-<version>.zip` | VPM package, for a VCC listing. |
+| `package.json` | VPM manifest of the release, with the zip's `url` and `zipSHA256`, ready to add to a listing. |
 
-   If your project is a git repository, add it as a submodule instead:
+Remove `com.dreadscripts.vrcsdkplus` first if you install the `.unitypackage`: with both packages, two copies register the same inspectors and menu items. A VCC install removes it for you.
 
-   ```sh
-   git submodule add https://github.com/ZaphkielTools/VRCSDKPlus.git Assets/VRCSDKPlus
-   ```
+### From source
 
-   You can also download the ZIP from GitHub and extract it into `Assets/VRCSDKPlus`.
+Clone the repository anywhere under `Assets`, or add it as a submodule if your project is a git repository:
+
+```sh
+git clone https://github.com/ZaphkielTools/VRCSDKPlus.git Assets/VRCSDKPlus
+```
+
+```sh
+git submodule add https://github.com/ZaphkielTools/VRCSDKPlus.git Assets/VRCSDKPlus
+```
+
+Use one install per project. A clone under `Assets` and the package under `Packages` share the same GUIDs and conflict.
 
 ## Usage
 
@@ -103,10 +112,21 @@ The EditMode tests live in `Tests/`. Open Window > General > Test Runner, select
 | `Avatar/` | Quick Setup |
 | `Tests/` | EditMode tests |
 | `Documentation~/` | README images. Unity skips folders whose name ends with `~`. |
+| `.github/` | Release workflow, release-please settings and the packaging script |
 
 ## Contributing
 
 Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Use the folder name as the scope, for example `fix(menus): keep the selection after undo`. [CHANGELOG.md](CHANGELOG.md) lists the changes of each version.
+
+### Releases
+
+[release-please](https://github.com/googleapis/release-please) reads the commit messages on `main` and keeps a release pull request open with the next version and its changelog: `fix` bumps the patch, `feat` the minor, and `!` or a `BREAKING CHANGE:` footer the major. Merging the pull request tags the version, publishes the release and attaches the three files above.
+
+To rebuild the files of an existing release, run the Release workflow from the Actions tab with its tag. To build them on your machine:
+
+```sh
+python .github/scripts/package.py --repo ZaphkielTools/VRCSDKPlus --out dist
+```
 
 ## Credits
 
