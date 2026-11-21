@@ -1,4 +1,4 @@
-# VRCSDK+
+![VRCSDK+: expression menu and parameter inspectors](Documentation~/images/banner.png)
 
 Custom inspectors for VRChat Expression Parameters and Expression Menus, plus a Quick Setup command for the Avatar Descriptor. VRCSDK+ replaces the SDK inspectors in the editor and leaves the SDK files untouched.
 
@@ -15,6 +15,10 @@ This repository is a Unity 6 fork of [VRCSDK+](http://web.archive.org/web/202412
 - Warnings for blank, duplicate and missing parameters. "Add" creates a missing parameter in one of the avatar's controllers. "Cleanup" removes the faulty entries after a confirmation.
 - Merge of another Expression Parameters asset, with every field copied.
 
+<p align="center">
+  <img src="Documentation~/images/parameters.png" width="480" alt="Expression Parameters inspector with the synced bits bar and a table of eleven parameters">
+</p>
+
 ### Expression Menu inspector
 
 - Parent menus: the menus that open this one as a submenu, the controls that do it, and the avatars in the open scenes that use it as their root menu.
@@ -23,6 +27,11 @@ This repository is a Unity 6 fork of [VRCSDK+](http://web.archive.org/web/202412
 - Control details: name, type with parameter conversion, text color, bold and italic, icon, parameter picker, value matched to the parameter type, submenu creation, puppet axes and labels.
 - Repair button for controls with missing axis parameters or labels. Drawing the inspector never writes to the asset.
 - Compact layout.
+
+<p align="center">
+  <img src="Documentation~/images/menu.png" width="400" alt="Expression Menu inspector on a Clothing submenu: parent menu, controls list and the details of a toggle">
+  <img src="Documentation~/images/puppet.png" width="400" alt="Expression Menu inspector on a four-axis puppet: axis parameters and one label with an icon per axis">
+</p>
 
 ### Quick Setup
 
@@ -93,6 +102,7 @@ The EditMode tests live in `Tests/`. Open Window > General > Test Runner, select
 | `Menus/` | Expression Menu inspector and parent menu index |
 | `Avatar/` | Quick Setup |
 | `Tests/` | EditMode tests |
+| `Documentation~/` | README images. Unity skips folders whose name ends with `~`. |
 
 ## Contributing
 
